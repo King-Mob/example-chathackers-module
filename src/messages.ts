@@ -23,10 +23,10 @@ const sendPersonRequest = (replyText: string) => {
   }
 };
 
-const assignRole = async (
+export const assignRole = async (
   personName: string,
   roomId: string,
-  replyText: string
+  roleName: string
 ) => {
   let roleState = await getPseudoState(roomId);
 
@@ -43,13 +43,13 @@ const assignRole = async (
       name: personName,
     },
     role: {
-      name: replyText,
+      name: roleName,
     },
   });
 
   setPseudoState(roomId, { assignedRoles });
 
-  return { message: `You've assigned ${personName} the role ${replyText}.` };
+  return { message: `You've assigned ${personName} the role ${roleName}.` };
 };
 
 const handleReply = async (event, botUserId) => {

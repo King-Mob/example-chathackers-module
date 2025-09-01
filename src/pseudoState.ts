@@ -1,3 +1,5 @@
+import { type State } from "../types";
+
 const pseudoState = {};
 
 export const getPseudoState = async (roomId: string) => {
@@ -6,7 +8,7 @@ export const getPseudoState = async (roomId: string) => {
 
 export const setPseudoState = async (
   roomId: string,
-  content: any
+  content: State
 ) => {
   pseudoState[roomId] = content;
 };

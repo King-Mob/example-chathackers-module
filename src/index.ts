@@ -1,8 +1,9 @@
 import express from "express";
 import * as fs from "fs";
 import { v4 as uuidv4 } from "uuid";
-import handleMessage from "./messages";
-import handleReaction from "./reactions";
+import handleMessage, { assignRole } from "./messages";
+import handleReaction, { removeRole } from "./reactions";
+import { getPseudoState } from "./pseudoState";
 
 const port = 5049;
 
@@ -28,6 +29,7 @@ async function start() {
 
   const app = express();
   app.use(express.json());
+  app.use(express.static("web/dist"));
 
   app.post("/", async (req, res) => {
     const { event, botUserId } = req.body;
@@ -46,6 +48,30 @@ async function start() {
     res.send({ success: true, response });
   });
 
+  app.get("/api/state", async (req, res) => {
+    const { roomId } = req.query;
+
+    const state = await getPseudoState(roomId as string);
+
+    res.send(state || { assignedRoles: [] });
+  })
+
+  app.post("/api/role", async (req, res) => {
+    const { roomId } = req.query;
+    const { personName, roleName } = req.body;
+
+    await assignRole(personName, roomId as string, roleName);
+
+    res.send({ success: true })
+  })
+
+  app.delete("/api/role", async (req, res) => {
+    const { roomId, roleId } = req.query;
+
+    await removeRole(roomId as string, roleId as string);
+
+    res.send({ success: true });
+  })
 
   app.listen(port);
 };

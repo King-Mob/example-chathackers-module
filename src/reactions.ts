@@ -32,17 +32,18 @@ const assignNewRole = async () => {
   };
 };
 
-const removeRole = async (event) => {
-  const roomId = event.room_id;
-  const roleToRemove = event.content.context;
-
-  if (!roleToRemove) {
-    return;
-  }
-
+export const removeRole = async (roomId: string, roleId: string) => {
   const roleState = await getPseudoState(roomId);
 
   if (!roleState) {
+    return;
+  }
+
+  const roleToRemove = roleState.assignedRoles.find(
+    assignedRole => assignedRole.id === roleId
+  );
+
+  if (!roleToRemove) {
     return;
   }
 
@@ -73,7 +74,10 @@ const handleReaction = async (event, botUserId) => {
     return assignNewRole();
   }
   if (reactionEmoji.includes("🙏")) {
-    return removeRole(eventFromReaction);
+    const roomId = event.room_id;
+    const roleId = eventFromReaction.content.context.id;
+
+    return removeRole(roomId, roleId);
   }
 
   //reaction not recognised
