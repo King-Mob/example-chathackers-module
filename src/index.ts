@@ -29,7 +29,7 @@ async function start() {
 
   const app = express();
   app.use(express.json());
-  app.use(express.static("web/dist"));
+  app.use("/", express.static("web/dist"));
 
   app.post("/", async (req, res) => {
     const { event, botUserId } = req.body;
