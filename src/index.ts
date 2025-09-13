@@ -1,5 +1,6 @@
 import express from "express";
 import * as fs from "fs";
+import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import handleMessage, { assignRole } from "./messages";
 import handleReaction, { removeRole } from "./reactions";
@@ -32,8 +33,9 @@ async function start() {
   app.use("/", express.static("web/dist/index.html"));
 
   app.get("/", async (req, res) => {
+    const htmlPath = path.resolve("./web/dist/index.html")
 
-    res.sendFile("./web/dist/index.html")
+    res.sendFile(htmlPath);
   })
 
   app.post("/", async (req, res) => {
