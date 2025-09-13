@@ -33,7 +33,7 @@ async function start() {
   app.use("/", express.static("web/dist/index.html"));
 
   app.get("/", async (req, res) => {
-    const htmlPath = path.resolve("./web/dist/index.html")
+    const htmlPath = path.resolve("../web/dist/index.html")
 
     res.sendFile(htmlPath);
   })
