@@ -32,7 +32,7 @@ async function start() {
   app.use("/", express.static("web/dist/index.html"));
 
   app.get("/", async (resolve, res) => {
-    res.send("howdy")
+    res.sendFile("web/dist/index.html")
   })
 
   app.post("/", async (req, res) => {
