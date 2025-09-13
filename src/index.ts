@@ -38,7 +38,7 @@ async function start() {
     fs.access("/", (res) => {
       console.log(res)
     })
-    console.log(result)
+
     console.log(htmlPath)
 
     res.sendFile(htmlPath);
