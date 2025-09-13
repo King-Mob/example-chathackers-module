@@ -30,15 +30,7 @@ async function start() {
 
   const app = express();
   app.use(express.json());
-  app.use("/", express.static("web/dist/index.html"));
-
-  app.get("/", async (req, res) => {
-    const htmlPath = path.resolve(__dirname, "../../web/dist/index.html")
-
-    console.log(htmlPath)
-
-    res.sendFile(htmlPath);
-  })
+  app.use("/", express.static(path.resolve(__dirname, "../../web/dist/index.html")));
 
   app.post("/", async (req, res) => {
     const { event, botUserId } = req.body;
