@@ -35,6 +35,8 @@ async function start() {
   app.get("/", async (req, res) => {
     const htmlPath = path.resolve('wwwroot', "../web/dist/index.html")
 
+    console.log(htmlPath)
+
     res.sendFile(htmlPath);
   })
 
