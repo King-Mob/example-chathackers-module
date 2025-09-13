@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import App from "./App";
 
 createRoot(document.getElementById("root")!).render(
-    <BrowserRouter>
-        <Routes>
-            <Route path="" element={<App />} />
-        </Routes>
-    </BrowserRouter>);
+  <BrowserRouter>
+    <Routes>
+      <Route path="*" element={<App />} />
+    </Routes>
+  </BrowserRouter>
+);
