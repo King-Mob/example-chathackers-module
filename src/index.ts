@@ -31,8 +31,9 @@ async function start() {
   app.use(express.json());
   app.use("/", express.static("web/dist/index.html"));
 
-  app.get("/", async (resolve, res) => {
-    res.sendFile("web/dist/index.html")
+  app.get("/", async (req, res) => {
+
+    res.sendFile("./web/dist/index.html")
   })
 
   app.post("/", async (req, res) => {
