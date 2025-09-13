@@ -31,6 +31,10 @@ async function start() {
   app.use(express.json());
   app.use("/", express.static("web/dist/index.html"));
 
+  app.get("/", async (resolve, res) => {
+    res.send("howdy")
+  })
+
   app.post("/", async (req, res) => {
     const { event, botUserId } = req.body;
 
