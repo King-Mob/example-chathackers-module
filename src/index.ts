@@ -35,7 +35,7 @@ async function start() {
   app.get("/", async (req, res) => {
     const htmlPath = path.resolve('wwwroot', "../../web/dist/index.html")
 
-    fs.opendir("/", (res) => {
+    fs.readdir("/", (res) => {
       console.log(res)
     })
 
