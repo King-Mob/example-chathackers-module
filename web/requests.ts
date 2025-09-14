@@ -1,14 +1,15 @@
-const { VITE_BASE_URL } = import.meta.env;
+const { origin, pathname } = window.location;
+const BASE_URL = `${origin}${pathname}`;
 
 export async function getToolState(roomId: string) {
-    const toolStateResponse = await fetch(`${VITE_BASE_URL}/api/state?roomId=${roomId}`);
+    const toolStateResponse = await fetch(`${BASE_URL}/api/state?roomId=${roomId}`);
     const toolStateResult = await toolStateResponse.json();
 
     return toolStateResult;
 }
 
 export async function postRole(roomId: string, personName: string, roleName: string) {
-    return fetch(`${VITE_BASE_URL}/api/role?roomId=${roomId}`, {
+    return fetch(`${BASE_URL}/api/role?roomId=${roomId}`, {
         method: "POST",
         body: JSON.stringify({
             roleName, personName
@@ -20,7 +21,7 @@ export async function postRole(roomId: string, personName: string, roleName: str
 }
 
 export async function deleteRole(roomId: string, roleId: string) {
-    return fetch(`${VITE_BASE_URL}/api/role?roomId=${roomId}&roleId=${roleId}`, {
+    return fetch(`${BASE_URL}/api/role?roomId=${roomId}&roleId=${roleId}`, {
         method: "DELETE"
     })
 }
